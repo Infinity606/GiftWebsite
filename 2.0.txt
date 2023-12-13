@@ -1,0 +1,70 @@
+import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
+
+const words = ['Barca'];
+
+const Hangman = () => {
+  const [selectedWord, setSelectedWord] = useState('');
+  const [guessedWord, setGuessedWord] = useState([]);
+  const [incorrectGuesses, setIncorrectGuesses] = useState([]);
+  const [guess, setGuess] = useState('');
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * words.length);
+    setSelectedWord(words[randomIndex].toLowerCase());
+  }, []);
+
+  const handleGuess = () => {
+    if (guess && selectedWord.includes(guess)) {
+      const newGuessedWord = selectedWord
+        .split('')
+        .map((letter, index) =>
+          guessedWord.includes(letter) ? guessedWord[index] : '_'
+        );
+      setGuessedWord(newGuessedWord);
+    } else {
+      setIncorrectGuesses([...incorrectGuesses, guess]);
+    }
+  
+    setGuess('');
+  };
+
+  const handleInputChange = (e) => {
+    setGuess(e.target.value.toLowerCase());
+  };
+
+  const isGameWon = guessedWord.join('') === selectedWord;
+  const isGameLost = incorrectGuesses.length >= 6;
+
+  return (
+    <div className="hangman-container">
+      <h1>Hangman</h1>
+      <div className="word-display">
+        {guessedWord.map((letter, index) => (
+          <span key={index}>{letter}</span>
+        ))}
+      </div>
+      <div className="input-container">
+        <input
+          type="text"
+          value={guess}
+          onChange={handleInputChange}
+          maxLength={1}
+        />
+        <button onClick={handleGuess} disabled={isGameWon || isGameLost}>
+          Guess
+        </button>
+      </div>
+      <div className="incorrect-guesses">
+        Incorrect Guesses: {incorrectGuesses.join(', ')}
+      </div>
+      {isGameWon && <div className="game-result">You Win!</div>}
+      {isGameLost && (
+        <div className="game-result">You Lose! The word was {selectedWord}</div>
+      )}
+    </div>
+  );
+};
+
+export default Hangman;

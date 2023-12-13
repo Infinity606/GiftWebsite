@@ -1,0 +1,57 @@
+import { useState } from 'react';
+import Confetti from 'react-confetti';
+import Gift from './assets/gift.png';
+import './App.css';
+
+function App() {
+  const imageUrl = 'https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/a86b647d-09b1-407b-859b-3ea00c34f2ee/fc-barcelona-2023-24-stadium-home-dri-fit-football-shirt-W7ntDn.png';
+
+  const [isPresentVisible, setIsPresentVisible] = useState(true);
+  const [confetti, setConfetti] = useState(false);
+  const [displayText, setDisplayText] = useState("Sorry, your present is a bit late, but here is a hint to what it is");
+
+  const handlePresentClick = () => {
+    setIsPresentVisible(false);
+    setConfetti(true);
+    setDisplayText("WOOO U GOT A BARCA JERSY");
+
+    // You can reset the confetti and text after a certain duration if needed
+    setTimeout(() => {
+      setConfetti(false);
+    }, 5000); // Adjust the duration as needed
+  };
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>
+          {displayText}
+        </h1>
+        {confetti && <Confetti />}
+        {isPresentVisible && (
+          <div className="present-container" onClick={handlePresentClick}>
+            <img
+              src={Gift}
+              alt="Gift"
+              className="gift-image"
+            />
+            <div className="present-text">
+              Click to open your present
+            </div>
+          </div>
+        )}
+        {!isPresentVisible && (
+          <div className="centered-image">
+            <img
+              src={imageUrl}
+              alt="Hint Image"
+              className="hint-image"
+            />
+          </div>
+        )}
+      </header>
+    </div>
+  );
+}
+
+export default App;

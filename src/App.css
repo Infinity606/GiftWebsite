@@ -1,0 +1,87 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.centered-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 225vh; /* Optionally, set a height for full viewport height */
+}
+
+/* hangman */
+.hangman-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.word-display {
+  margin: 20px 0;
+  font-size: 24px;
+}
+
+.input-container {
+  margin-bottom: 20px;
+}
+
+input {
+  width: 30px;
+  text-align: center;
+  margin-right: 10px;
+}
+
+button {
+  padding: 5px 10px;
+}
+
+.incorrect-guesses {
+  margin-top: 10px;
+  color: red;
+  font-weight: bold;
+}
+
+.game-result {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: green;
+}
